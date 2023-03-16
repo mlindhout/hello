@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
 	response := os.Getenv("RESPONSE")
 	if len(response) == 0 {
-		response = "Hello OpenShift for Developers!"
+		t := time.Now()
+		response = fmt.Sprintf("Hello OpenShift for Developers @ %s!", t.String())
 	}
 
 	fmt.Fprintln(w, response)
